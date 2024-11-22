@@ -1,26 +1,46 @@
 #!/bin/bash
-# Ensure the script exits if any command fails
 set -e
 
-# Install required dependencies for the virtual environment
+# Update system packages
 sudo apt update
-sudo apt install -y python3.12-venv python3-pip
+sudo apt install -y python3.12-venv python3-pip curl
 
-# Navigate to the app directory
+# Navigate to the application directory
 cd /home/ubuntu/EasyScheduler01
 
 # Ensure the ownership of the app directory is correct
 sudo chown -R ubuntu:ubuntu /home/ubuntu/EasyScheduler01
 
+# Remove the existing virtual environment if it exists
+if [ -d "venv" ]; then
+    echo "Removing existing virtual environment..."
+    rm -rf venv
+fi
+
+# Create a new virtual environment
+echo "Creating virtual environment..."
+python3 -m venv venv
+
 # Activate the virtual environment
 source venv/bin/activate
 
-# Upgrade pip to the latest version
-pip install --upgrade pip
+# Install pip manually if needed
+if [ ! -f "venv/bin/pip" ]; then
+    echo "Installing pip..."
+    curl https://bootstrap.pypa.io/get-pip.py | python
+fi
 
-# Install dependencies from requirements.txt
+# Upgrade pip, setuptools, and wheel
+pip install --upgrade pip setuptools wheel
+
+# Verify virtual environment setup
+echo "Python version: $(python --version)"
+echo "Pip version: $(pip --version)"
+echo "Virtual environment path: $(which python)"
+
+# Install dependencies
 echo "Installing dependencies from requirements.txt..."
-pip install --no-cache-dir -r requirements.txt --break-system-packages
+pip install --no-cache-dir -r requirements.txt
 
 # Ensure Gunicorn is installed
 if ! pip freeze | grep -q gunicorn; then
