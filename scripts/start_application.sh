@@ -20,7 +20,7 @@ pip install --upgrade pip
 
 # Install dependencies from requirements.txt
 echo "Installing dependencies from requirements.txt..."
-pip install -r requirements.txt
+pip install --no-cache-dir -r requirements.txt --break-system-packages
 
 # Ensure Gunicorn is installed
 if ! pip freeze | grep -q gunicorn; then
