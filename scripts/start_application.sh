@@ -7,7 +7,7 @@ cd /home/ubuntu/EasyScheduler01
 
 # Activate the virtual environment
 source venv/bin/activate
-
+sudo apt install python3-pip
 # Add local bin to PATH
 export PATH=$PATH:/home/ubuntu/.local/bin
 # Change the owner of the venv to your current user
