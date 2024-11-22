@@ -9,6 +9,9 @@ sudo apt install -y python3.12-venv python3-pip
 # Navigate to the app directory
 cd /home/ubuntu/EasyScheduler01
 
+# Ensure the ownership of the app directory is correct
+sudo chown -R ubuntu:ubuntu /home/ubuntu/EasyScheduler01
+
 # Create the virtual environment if it doesn't exist
 if [ ! -d "venv" ]; then
     echo "Creating virtual environment..."
@@ -18,15 +21,12 @@ fi
 # Activate the virtual environment
 source venv/bin/activate
 
-# Ensure the ownership of the virtual environment is correct
-sudo chown -R ubuntu:ubuntu /home/ubuntu/EasyScheduler01/venv
-
-# Add local bin to PATH (to make locally installed packages available)
-export PATH=$PATH:/home/ubuntu/.local/bin
+# Upgrade pip to the latest version
+pip install --upgrade pip
 
 # Install dependencies from requirements.txt
 echo "Installing dependencies from requirements.txt..."
-pip install --no-cache-dir -r requirements.txt
+pip install --no-cache-dir -r requirements.txt --break-system-packages
 
 # Ensure Gunicorn is installed
 if ! pip freeze | grep -q gunicorn; then
