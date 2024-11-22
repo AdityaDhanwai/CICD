@@ -12,12 +12,6 @@ cd /home/ubuntu/EasyScheduler01
 # Ensure the ownership of the app directory is correct
 sudo chown -R ubuntu:ubuntu /home/ubuntu/EasyScheduler01
 
-# Create the virtual environment if it doesn't exist
-if [ ! -d "venv" ]; then
-    echo "Creating virtual environment..."
-    python3 -m venv venv
-fi
-
 # Activate the virtual environment
 source venv/bin/activate
 
