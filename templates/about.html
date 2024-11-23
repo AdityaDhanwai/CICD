@@ -107,7 +107,9 @@
 </head>
 <body>
     <h1>About This Application</h1>
-    <p>Hello, this is a Flask project deployed using a Jenkins pipeline. The pipeline script pulls code from GitHub, builds a Docker image, and runs it inside a Docker container. This project is created and managed by Aditya Dhanwai and Shubhan Ansari.</p>
+    <p>Hello, this is a Flask project deployed using a CI/CD pipeline. The pipeline script pulls code from GitHub, builds the code using Code Build and Deploy it using AWS Code Deploy. Also, to automate I have also created the Pipeline using AWS Code Pipeline
+        which automatically pulls the changes from Soure (GitHub) and triggers the Buils and Code Deploy !
+    </p>
     <a href="/">Back to Home</a>
 
     <div class="background-animation">
